@@ -21,7 +21,7 @@ jira,   tetstrail
 devtools,  postman 
 --- 
 📱 Mobile Application Testing:
-android-studio,  charles-proxy,  fiddler  proxyman 
+android-studio,  charles-proxy,  fiddler,  proxyman 
 ---
 💾Working with Data:
 mysql,  mongodb 
