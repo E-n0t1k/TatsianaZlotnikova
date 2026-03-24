@@ -15,17 +15,17 @@ With 9 years of experience in manufacturing focused on quality control, process 
 
 ---
 📁 Test Documentation:
-jira   tetstrail
+jira,   tetstrail
 ---
 🛠 Web Application Testing:
-devtools  postman 
+devtools,  postman 
 --- 
 📱 Mobile Application Testing:
-android-studio  charles-proxy  fiddler  proxyman 
+android-studio,  charles-proxy,  fiddler  proxyman 
 ---
 💾Working with Data:
-mysql  mongodb 
+mysql,  mongodb 
 ---
 ✏️ Working with Code:
-git  bash  vscode 
+git,  bash,  vscode 
 --- 
