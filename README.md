@@ -1,30 +1,32 @@
 # Привет, меня зовут Таня!
 
----
+Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif) My name is Tanua
+============================================================================================================================================
 
-👨‍💻 Обо мне:
-Я - начинающий специалист по обеспечению качества. Обладаю техническим складом ума и дотошностью (в хорошем смысле), чтобы находить неочевидные баги там, где их никто не ждет.
+👨‍💻 I'm a beginner software tester
+------------------------------
+
+With 9 years of experience in manufacturing focused on quality control, process engineering, and technical documentation, I have developed skills that are directly transferable to software testing.
+
+* 🌍  I'm based in Minsk
+* ✉️  You can contact me at [tanuashka0@gmail.com](mailto:tanuashka0@gmail.com)
+* 🧠  I'm currently learning Advanced Course: REST API Testing with Postman---
+
 
 ---
-
-📫 Как связаться со мной: LinkedIn  Gmail
----
-🤝 Социальные сети:
-linkedin telegram
----
-📁 Тестовая документация:
+📁 Test Documentation:
 jira   tetstrail
 ---
-🛠 Тестирование веб-приложений:
+🛠 Web Application Testing:
 devtools  postman 
 --- 
-📱 Тестирование мобильных приложений:
+📱 Mobile Application Testing:
 android-studio  charles-proxy  fiddler  proxyman 
 ---
-💾 Работа с данными:
+💾Working with Data:
 mysql  mongodb 
 ---
-✏️ Работа с кодом:
+✏️ Working with Code:
 git  bash  vscode 
 --- 
 Visitor Badge
