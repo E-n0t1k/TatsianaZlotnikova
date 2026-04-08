@@ -9,7 +9,9 @@ With 9 years of experience in manufacturing focused on quality control, process 
 
 * 🌍  I'm based in Minsk
 * ✉️  You can contact me at [tanuashka0@gmail.com](mailto:tanuashka0@gmail.com)
-* 🧠  I'm currently learning Advanced Course: REST API Testing with Postman
+* 🧠  Completed:
+    + [Software Testing from Scratch 2026](https://www.udemy.com/certificate/UC-87e2ae4f-14dd-412e-8995-ded4e07de309/)
+    + [Advanced Course: REST API Testing with Postman](https://stepik.org/cert/3197859)
 
 
 ---
