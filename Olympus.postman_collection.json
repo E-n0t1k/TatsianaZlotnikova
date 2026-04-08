@@ -1,0 +1,1789 @@
+{
+  "info": {
+    "_postman_id": "36d623bf-72fe-46bc-bf60-70a58ac03ec4",
+    "name": "Olympus",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51353271",
+    "_collection_link": "https://go.postman.co/collection/51353271-36d623bf-72fe-46bc-bf60-70a58ac03ec4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authorization",
+      "item": [
+        {
+          "name": "Регистрация нового пользователя",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "201 - Регистрация успешна",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "400 - Пользователь уже существует",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Вход и получение токена",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Превращаем текстовый ответ сервера в понятный JSON-объект\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "// 2. Ищем в этом объекте поле с токеном. \r",
+                  "// В разных API оно может называться \"token\", \"access_token\" или \"blessing\"\r",
+                  "const myToken = jsonData.token; //token – это ключ в JSON {\"token\":\"значение}\r",
+                  "\r",
+                  "pm.environment.set(\"token\", myToken);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Успешный вход",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "400 - Неверные данные",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"password\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gods",
+      "item": [
+        {
+          "name": "Получить список всех существ",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "const savedId = pm.environment.get(\"entityId\");\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "//  Проверка времени ответа \r",
+                  "pm.test(\"Response time is less than 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что тело ответа не пустое\r",
+                  "pm.test(\"Body is not empty\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+                  "});\r",
+                  "// Валидация JSON Schema\r",
+                  "const schema = {\r",
+                  "    type: \"array\",\r",
+                  "    items: {\r",
+                  "        type: \"object\",\r",
+                  "        properties: {\r",
+                  "            id: { type: \"integer\" },\r",
+                  "            name: { type: \"string\" },\r",
+                  "            category: { type: \"string\" },\r",
+                  "            desc: { type: \"string\" },\r",
+                  "            img: { type: \"string\" }\r",
+                  "        },\r",
+                  "        required: [\"id\", \"name\", \"category\", \"desc\", \"img\"]\r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Response structure matches schema\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData).to.be.an('array');\r",
+                  "    \r",
+                  "    // Если массив не пустой, проверяем первый элемент на наличие всех ключей\r",
+                  "    if (jsonData.length > 0) {\r",
+                  "        const firstItem = jsonData[0];\r",
+                  "        pm.expect(firstItem).to.have.all.keys('id', 'name', 'category', 'desc', 'img');\r",
+                  "        pm.expect(firstItem.id).to.be.a('number');\r",
+                  "        pm.expect(firstItem.name).to.be.a('string');\r",
+                  "        pm.expect(firstItem.category).to.be.a('string');\r",
+                  "        pm.expect(firstItem.desc).to.be.a('string');\r",
+                  "        pm.expect(firstItem.img).to.be.a('string');\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology?category=all&sort=desc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "gods",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "heroes",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "creatures",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "all"
+                },
+                {
+                  "key": "sort",
+                  "value": "asc",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "desc"
+                }
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET'  \n'[https://api.qasandbox.ru/api/mythology'](https://api.qasandbox.ru/api/mythology')  \n\\-H 'accept: application/json'"
+          },
+          "response": [
+            {
+              "name": "500- ошибка сервера",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology?category=gods&category=heroes&category=creatures&category=all",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "gods",
+                      "type": "text"
+                    },
+                    {
+                      "key": "category",
+                      "value": "heroes"
+                    },
+                    {
+                      "key": "category",
+                      "value": "creatures"
+                    },
+                    {
+                      "key": "category",
+                      "value": "all"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Mock-запрос",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "const savedId = pm.environment.get(\"entityId\");\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "//  Проверка времени ответа \r",
+                  "pm.test(\"Response time is less than 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что тело ответа не пустое\r",
+                  "pm.test(\"Body is not empty\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+                  "});\r",
+                  "// Валидация JSON Schema\r",
+                  "const schema = {\r",
+                  "    type: \"array\",\r",
+                  "    items: {\r",
+                  "        type: \"object\",\r",
+                  "        properties: {\r",
+                  "            id: { type: \"integer\" },\r",
+                  "            name: { type: \"string\" },\r",
+                  "            category: { type: \"string\" },\r",
+                  "            desc: { type: \"string\" },\r",
+                  "            img: { type: \"string\" }\r",
+                  "        },\r",
+                  "        required: [\"id\", \"name\", \"category\", \"desc\", \"img\"]\r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Response structure matches schema\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData).to.be.an('array');\r",
+                  "    \r",
+                  "    // Если массив не пустой, проверяем первый элемент на наличие всех ключей\r",
+                  "    if (jsonData.length > 0) {\r",
+                  "        const firstItem = jsonData[0];\r",
+                  "        pm.expect(firstItem).to.have.all.keys('id', 'name', 'category', 'desc', 'img');\r",
+                  "        pm.expect(firstItem.id).to.be.a('number');\r",
+                  "        pm.expect(firstItem.name).to.be.a('string');\r",
+                  "        pm.expect(firstItem.category).to.be.a('string');\r",
+                  "        pm.expect(firstItem.desc).to.be.a('string');\r",
+                  "        pm.expect(firstItem.img).to.be.a('string');\r",
+                  "    }\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{mock_url}}/mythology-mock",
+              "host": [
+                "{{mock_url}}"
+              ],
+              "path": [
+                "mythology-mock"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "gods",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "heroes",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "creatures",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "asc",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET'  \n'[https://api.qasandbox.ru/api/mythology'](https://api.qasandbox.ru/api/mythology')  \n\\-H 'accept: application/json'"
+          },
+          "response": [
+            {
+              "name": "Mock-запрос",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{mock_url}}/mythology-mock",
+                  "host": [
+                    "{{mock_url}}"
+                  ],
+                  "path": [
+                    "mythology-mock"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "[\r\n  {\r\n    \"id\": 12345,\r\n    \"name\": \"Посейдон\",\r\n    \"category\": \"gods\",\r\n    \"desc\": \"Бог морей и землетрясений.\",\r\n    \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n  }\r\n]"
+            }
+          ]
+        },
+        {
+          "name": "Призвать новую сущность",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Превращаем сырой ответ сервера в понятный JavaScript-объект\r",
+                  "const responseJson = pm.response.json();\r",
+                  "\r",
+                  "// 2. Извлекаем значение для переменной.\r",
+                  "// Мы знаем, что она лежит в поле \"id\".\r",
+                  "const hero_id = responseJson.id;\r",
+                  "\r",
+                  "console.log(\"Поймана искра нового героя: \" + hero_id); // Для отладки в консоли\r",
+                  "\r",
+                  "// 3. Самое важное: Кладем переменную в Переменную Окружения).\r",
+                  "// Мы называем этот сосуд \"id\". Теперь это значение доступно везде!\r",
+                  "pm.environment.set(\"hero_id\", hero_id);\r",
+                  "\r",
+                  "// 4. Хорошим тоном будет сразу проверить, что мы поймали именно число, а не пустоту.\r",
+                  "pm.test(\"Искра (ID героя) успешно получена и сохранена\", function () {\r",
+                  "    pm.expect(hero_id).to.be.a('number');\r",
+                  "    pm.expect(pm.environment.get(\"hero_id\")).to.eql(hero_id);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем данные из ответа\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": \"gods\",\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Призвать новую сущность",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": ,\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Призвать новую сущность (mock)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Превращаем сырой ответ сервера в понятный JavaScript-объект\r",
+                  "const responseJson = pm.response.json();\r",
+                  "\r",
+                  "// 2. Извлекаем значение для переменной.\r",
+                  "// Мы знаем, что она лежит в поле \"id\".\r",
+                  "const hero_id = responseJson.id;\r",
+                  "\r",
+                  "console.log(\"Поймана искра нового героя: \" + hero_id); // Для отладки в консоли\r",
+                  "\r",
+                  "// 3. Самое важное: Кладем переменную в Переменную Окружения).\r",
+                  "// Мы называем этот сосуд \"id\". Теперь это значение доступно везде!\r",
+                  "pm.environment.set(\"hero_id\", hero_id);\r",
+                  "\r",
+                  "// 4. Хорошим тоном будет сразу проверить, что мы поймали именно число, а не пустоту.\r",
+                  "pm.test(\"Искра (ID героя) успешно получена и сохранена\", function () {\r",
+                  "    pm.expect(hero_id).to.be.a('number');\r",
+                  "    pm.expect(pm.environment.get(\"hero_id\")).to.eql(hero_id);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем данные из ответа\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"category\": \"{{category}}\",\r\n  \"desc\": \"{{desc}}\",\r\n  \"img\": \"{{img}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{mock_url}}/mythology-Olympus",
+              "host": [
+                "{{mock_url}}"
+              ],
+              "path": [
+                "mythology-Olympus"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Призвать новую сущность",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": ,\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            },
+            {
+              "name": "Призвать новую сущность (mock)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"category\": \"{{category}}\",\r\n  \"desc\": \"{{desc}}\",\r\n  \"img\": \"{{img}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{mock_url}}/mythology-Olympus",
+                  "host": [
+                    "{{mock_url}}"
+                  ],
+                  "path": [
+                    "mythology-Olympus"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\r\n  \"id\": \"number\",\r\n  \"name\": \"string\",\r\n  \"age\": \"number\",\r\n  \"status\": \"string\"\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "Призвать новую сущность Tests",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Получаем данные из ответа\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "pm.environment.set(\"entityId\", response.id);\r",
+                  "console.log(\"✅ ID сохранен:\", response.id);\r",
+                  "// Извлекаем ID\r",
+                  "const characterId = response.id;\r",
+                  "\r",
+                  "// Сохраняем ID в переменную окружения\r",
+                  "pm.environment.set(\"characterId\", characterId);\r",
+                  "\r",
+                  "pm.test(\"Ответ является объектом\", function() {\r",
+                  "    pm.expect(response).to.be.an(\"object\");\r",
+                  "});\r",
+                  "\r",
+                  "// 4. Проверяем наличие ВСЕХ ключей\r",
+                  "pm.test(\"Ответ содержит все обязательные ключи\", function() {\r",
+                  "    pm.expect(response).to.have.all.keys(\"id\", \"name\", \"category\", \"desc\", \"img\");\r",
+                  "});\r",
+                  "    \r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});\r",
+                  "\r",
+                  "// 1. Проверка Connection: keep-alive\r",
+                  "pm.test(\"Connection содержит значение keep-alive\", function() {\r",
+                  "    const connectionHeader = pm.response.headers.get(\"Connection\");\r",
+                  "    pm.expect(connectionHeader).to.equal(\"keep-alive\");\r",
+                  "    console.log(\"✅ Connection:\", connectionHeader);\r",
+                  "});\r",
+                  "\r",
+                  "// 2. Проверка Content-Type (содержит application/json)\r",
+                  "pm.test(\"Content-Type содержит application/json\", function() {\r",
+                  "    const contentType = pm.response.headers.get(\"Content-Type\");\r",
+                  "    pm.expect(contentType).to.include(\"application/json\");\r",
+                  "    console.log(\"✅ Content-Type:\", contentType);\r",
+                  "});\r",
+                  "\r",
+                  "// 3. Проверка Content-Length (больше 0)\r",
+                  "pm.test(\"Content-Length больше 0\", function() {\r",
+                  "    const contentLength = pm.response.headers.get(\"Content-Length\");\r",
+                  "    const lengthNum = parseInt(contentLength);\r",
+                  "    pm.expect(lengthNum).to.be.greaterThan(0);\r",
+                  "    console.log(\"✅ Content-Length:\", contentLength);\r",
+                  "});\r",
+                  "\r",
+                  "// 4. Дополнительная проверка: все три заголовка существуют\r",
+                  "pm.test(\"Все необходимые заголовки присутствуют\", function() {\r",
+                  "    pm.expect(pm.response.headers.get(\"Connection\")).to.exist;\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.exist;\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Length\")).to.exist;\r",
+                  "    console.log(\"✅ Все заголовки присутствуют\");\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "\r",
+                  "\r",
+                  "const _ = require('lodash');\r",
+                  "\r",
+                  "const categories = ['gods', 'heroes', 'creatures'];\r",
+                  "const randomCategory = _.sample(categories);\r",
+                  "\r",
+                  "pm.variables.set(\"randomCategory\", randomCategory);\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: 'https://api.qasandbox.ru/api/mythology', // URL\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'Content-Type': 'application/json'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'raw',\r",
+                  "        raw: JSON.stringify({\r",
+                  "            username: 'hercules_7775555',  \r",
+                  "            password: 'secure_passsSSSSSSSSSSSSSSS'\r",
+                  "        })\r",
+                  "    }\r",
+                  "}, function (err, res) {\r",
+                  "    const json = res.json();\r",
+                  "\r",
+                  "    // посмотри структуру ответа!\r",
+                  "    pm.environment.set(\"authToken\", json.token);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": \"{{randomCategory}}\",\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Призвать новую сущность (Vault)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{vault:token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": \"gods\",\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Получить одну сущность по ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mythology/{{characterId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology",
+                "{{characterId}}"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.qasandbox.ru/api/mythology/11' \\\r\n  -H 'accept: application/json'"
+          },
+          "response": [
+            {
+              "name": "404 - персонаж не найден",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/mythology/99999",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology",
+                    "99999"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Полное обновление сущности",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Ответ метода PUT соответствет MythologyEntity schema\", function () {\r",
+                  "    const schema = {\r",
+                  "        type: \"object\",\r",
+                  "        required: [\"name\", \"category\", \"desc\", \"img\"],\r",
+                  "        properties: {\r",
+                  "            name: { type: \"string\" },\r",
+                  "            category: { \r",
+                  "                type: \"string\",\r",
+                  "                enum: [\"gods\", \"heroes\", \"creatures\"]\r",
+                  "            },\r",
+                  "            desc: { type: \"string\" },\r",
+                  "            img: { type: \"string\" }\r",
+                  "        }\r",
+                  "    };\r",
+                  "\r",
+                  "    pm.response.to.have.jsonSchema(schema);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Посейдон Арон\", \r\n  \"category\": \"heroes\",\r\n  \"desc\": \"Тестирует все подряд\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology/{{characterId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology",
+                "{{characterId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "403 - Заблокировано Системой (ID 1-31)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Посейдон Арон\", \r\n  \"category\": \"heroes\",\r\n  \"desc\": \"Тестирует все подряд\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology",
+                    "1"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Частичное изменение сущности",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \r\n  \"desc\": \"тестирую метод PATCH\"\r\n \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology/{{characterId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology",
+                "{{characterId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 - Пустое тело запроса",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology/{{characterId}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology",
+                    "{{characterId}}"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Изгнать сущность (удаление)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {\r",
+                  "\tpm.response.to.have.status(204);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Время ответа меньше 200ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/mythology/{{characterId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology",
+                "{{characterId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "403 - Нельзя удалять системных героев",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/mythology/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology",
+                    "2"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Creatures",
+      "item": []
+    },
+    {
+      "name": "Heroes",
+      "item": []
+    },
+    {
+      "name": "Redirection",
+      "item": [
+        {
+          "name": "Получить список всех существ Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "const savedId = pm.environment.get(\"entityId\");\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "//  Проверка времени ответа \r",
+                  "pm.test(\"Response time is less than 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка, что тело ответа не пустое\r",
+                  "pm.test(\"Body is not empty\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+                  "});\r",
+                  "// Валидация JSON Schema\r",
+                  "const schema = {\r",
+                  "    type: \"array\",\r",
+                  "    items: {\r",
+                  "        type: \"object\",\r",
+                  "        properties: {\r",
+                  "            id: { type: \"integer\" },\r",
+                  "            name: { type: \"string\" },\r",
+                  "            category: { type: \"string\" },\r",
+                  "            desc: { type: \"string\" },\r",
+                  "            img: { type: \"string\" }\r",
+                  "        },\r",
+                  "        required: [\"id\", \"name\", \"category\", \"desc\", \"img\"]\r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test(\"Response structure matches schema\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData).to.be.an('array');\r",
+                  "    \r",
+                  "    // Если массив не пустой, проверяем первый элемент на наличие всех ключей\r",
+                  "    if (jsonData.length > 0) {\r",
+                  "        const firstItem = jsonData[0];\r",
+                  "        pm.expect(firstItem).to.have.all.keys('id', 'name', 'category', 'desc', 'img');\r",
+                  "        pm.expect(firstItem.id).to.be.a('number');\r",
+                  "        pm.expect(firstItem.name).to.be.a('string');\r",
+                  "        pm.expect(firstItem.category).to.be.a('string');\r",
+                  "        pm.expect(firstItem.desc).to.be.a('string');\r",
+                  "        pm.expect(firstItem.img).to.be.a('string');\r",
+                  "    }\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Сбрасываем флаг остановки\r",
+                  "pm.environment.unset(\"stop_execution\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology?category=all&sort=desc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "gods",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "heroes",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "creatures",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "all"
+                },
+                {
+                  "key": "sort",
+                  "value": "asc",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "desc"
+                }
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET'  \n'[https://api.qasandbox.ru/api/mythology'](https://api.qasandbox.ru/api/mythology')  \n\\-H 'accept: application/json'"
+          },
+          "response": [
+            {
+              "name": "500- ошибка сервера",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology?category=gods&category=heroes&category=creatures&category=all",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "gods",
+                      "type": "text"
+                    },
+                    {
+                      "key": "category",
+                      "value": "heroes"
+                    },
+                    {
+                      "key": "category",
+                      "value": "creatures"
+                    },
+                    {
+                      "key": "category",
+                      "value": "all"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "asc",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Призвать новую сущность Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": \"gods\",\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/mythology",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Призвать новую сущность",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Посейдон\",\r\n  \"category\": ,\r\n  \"desc\": \"Бог морей и землетрясений.\",\r\n  \"img\": \"https://images.unsplash.com/photo-1503152394-c571994fd383\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/mythology",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Изгнать сущность (удаление) Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Получаем статус-код\r",
+                  "const statusCode = pm.response.code;\r",
+                  "\r",
+                  "console.log(\"DELETE вернул: \" + statusCode);\r",
+                  "\r",
+                  "if (statusCode === 204) {\r",
+                  "    console.log(\"✅ 204 - ресурс удален. Идем по порядку: GET → POST\");\r",
+                  "}\r",
+                  "else if (statusCode === 404) {\r",
+                  "    console.log(\"❌ 404 - ресурс не найден. Пропускаем GET, идем сразу на POST\");\r",
+                  "    pm.execution.setNextRequest(\"Призвать новую сущность Copy\");\r",
+                  "}\r",
+                  "else {\r",
+                  "    // Для 403 и любых других статусов\r",
+                  "    console.log(\"⚠️ DELETE вернул \" + statusCode + \" - пропускаем GET, идем на POST\");\r",
+                  "    pm.execution.setNextRequest(\"Признать новую сущность Copy\");\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/mythology/{{characterId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mythology",
+                "{{characterId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "403 - Нельзя удалять системных героев",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/mythology/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "mythology",
+                    "2"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.qasandbox.ru/api"
+    },
+    {
+      "key": "username",
+      "value": "hercules_7899"
+    },
+    {
+      "key": "password",
+      "value": "secure_pass"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "bbe482dc-0bb0-4f37-964e-12830e8fa1ee",
+      "value": ""
+    }
+  ]
+}
