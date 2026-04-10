@@ -16,7 +16,7 @@ With 9 years of experience in manufacturing focused on quality control, process 
 
 ---
 📁 Test Documentation:
-Jira,   TetstRail
+Jira,   TestRail
 ---
 🛠 Web Application Testing:
 DevTools,  Postman, Swagger 
